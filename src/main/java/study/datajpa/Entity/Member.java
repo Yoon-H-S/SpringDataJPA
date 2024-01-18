@@ -7,6 +7,10 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "username", "age"}) // team을 적으면 무한루프를 돌기 때문에 연관관계 필드는 toString에 넣지 않는게 좋다.
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username"
+)
 public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
@@ -27,6 +31,11 @@ public class Member {
         if(team != null) {
             changeTeam(team);
         }
+    }
+
+    public Member(String username, int age) {
+        this.username = username;
+        this.age = age;
     }
 
     public void changeTeam(Team team) {
