@@ -33,7 +33,7 @@ public class MemberController {
         return memberRepository.findAll(pageable).map(MemberDto::new);
     }
 
-    @PostConstruct // 애플리케이션이 실행될 때 같이 실행됨
+//    @PostConstruct // 애플리케이션이 실행될 때 같이 실행됨
     public void init() {
         for (int i = 0; i < 100; i++) {
             memberRepository.save(new Member("user" + i, i));
